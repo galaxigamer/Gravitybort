@@ -1,0 +1,32 @@
+{
+  "name": "gravitybot",
+  "version": "0.0.0",
+  "description": "un bot multifonction",
+  "main": "Bot.js",
+  "scripts": {
+    "start": "node Bot.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "discordbot"
+  ],
+  "author": "Its me",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.6.4",
+    "opusscript": "0.0.7",
+    "simple-youtube-api": "^5.2.1",
+    "ytdl-core": "^2.1.7"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-aqua": "^1.5.0"
+  },
+  "eslintConfig": {
+    "extends": "aqua",
+    "rules": {
+      "no-console": 0
+    }
+  }
+}
