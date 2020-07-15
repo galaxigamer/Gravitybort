@@ -5,7 +5,7 @@ http.createServer(function(request,responce)
 }).listen(3000);
 
 const { Client, Util } = require('discord.js');
-const { TOKEN, PREFIX, GOOGLE_API_KEY } = require('./config');
+const { TOKEN, PREFIX, GOOGLE_API_KEY, LIEN1 } = require('./config');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 const Discord = require("discord.js");
@@ -22,23 +22,12 @@ client.on('message', message => {
   }
 });
 
-
 client.on('message', message => {
   if (message.content === `${PREFIX}invite`) {
-    message.reply('voici mon invitation : [- https://discordapp.com/oauth2/authorize?client_id=719847072873840720&scope=bot&permissions=2146958847] ');
+    message.reply('voici mon invitation : [ https://discordapp.com/oauth2/authorize?client_id=719847072873840720&scope=bot&permissions=2146958847 ]');
   }
 });
 
-client.on('message', message => {
-  if (message.content === `${PREFIX}annonce`) {
-    var embed = new Discord.RichEmbed()
-    .setTitle('annonce')
-    .setColor('RANDOM')
-    .setDescription('**:mega:annonce:mega:    -   [-`V1.15`-]**\n • :new: 4 nouvelle commande et une modifier ! \n voici les 4 nouvelle commendes : \n  g!support \n**Donne le serveur support.** , \ng!annonce,\n**Donne les annonce du serveur support.**  \ng!invite,\n**Donne l invitation du bot.**  \ng!but\n**Donne le but du bot sur Discord.** \n commande modifer: g!help.')
-    .setFooter('nouvelle Version sorti :[-`V1.15`-]')
-    message.channel.send(embed);
-  }
-});
 
 client.on('message', message => {
   if (message.content === `${PREFIX}but`) {
@@ -65,11 +54,13 @@ client.on('message', message => {
     var embed = new Discord.RichEmbed()
     .setTitle('help [-`V1.15`-]')
     .setColor('#F72E1E')
-    .setDescription(` \n${PREFIX}play,\n **Joue de la musique.** \n ${PREFIX}skip,\n**Skip la musique en cours (only admin).**  \n${PREFIX}np,\n**Donne la musique qui est en train de jouer.**  \n${PREFIX}volume, \n**Augemente le volume de le music.** \n${PREFIX}stop,\n**arrête la music **  \n${PREFIX}resume, \n**Met la music ou vous l'avez stopper.** \n${PREFIX}queue,\n**Donne la playlist.**  \n${PREFIX}pause,\n**Stop la music.** \n${PREFIX}support \n**Donne le serveur support.** , \n${PREFIX}annonce,\n**Donne les annonce du serveur support.**  \n${PREFIX}invite,\n**Donne l'invitation du bot.**  \n${PREFIX}but\n**Donne le but du bot sur Discord.** `);
+    .setDescription(` \n${PREFIX}play,\n **Joue de la musique.** \n ${PREFIX}skip,\n**Skip la musique en cours (only admin).**  \n${PREFIX}np,\n**Donne la musique qui est en train de jouer.**  \n${PREFIX}volume, \n**Augemente le volume de le music.** \n${PREFIX}stop,\n**arrête la music **  \n${PREFIX}resume, \n**Met la music ou vous l'avez stopper.** \n${PREFIX}queue,\n**Donne la playlist.**  \n${PREFIX}pause,\n**Stop la music.** \n${PREFIX}support \n**Donne le serveur support du bot** \n${PREFIX}invite,\n**Donne l'invitation du bot.**  \n${PREFIX}but \n **Donne le but du bot sur Discord.** `)
+    .setThumbnail(message.author.avatarURL) 
+    .setTimestamp()
+    .setFooter('By: Gravity - [-V 1.15-]','https://cdn.discordapp.com/icons/719836153905414194/a247c86f3eec01923587839baeda64de.png?size=2048');
     message.channel.send(embed);
   }
 });
-
 
 
 client.on('warn', console.warn);
@@ -78,16 +69,16 @@ client.on('error', console.error)
 
 client.on('ready',() => {
     console.log('je suis en ligne (Bot: Hosting ' + `${client.users.size}` + ' users, in ' + `${client.channels.size}` + ' channels of ' + `${client.guilds.size}` + ' guilds.)')
-    client.user.setActivity(`${PREFIX}help | ${client.guilds.size} serveur !`, { type: "LISTENING"},);
+    client.user.setActivity(`${PREFIX}help | ${client.guilds.size} Serveurs ! `, { type: "LISTENING"},);
 /////////////////////////
 //made Galaxigamer#1199//
-////////////////////////
+/////////////////////////
 
 });
 
-client.on('disconnect', () => console.log('je suis déconecter...'));
+client.on('disconnect', () => console.log('je me suis déconecter...'));
 
-client.on('reconnecting', () => console.log('je suis reconnecter'));
+client.on('reconnecting', () => console.log('je me suis reconnecter'));
 
 client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
@@ -132,10 +123,11 @@ client.on('message', async msg => { // eslint-disable-line
                     var videos = await youtube.searchVideos(searchString, 10);
                     let index = 0;
                     var embed = new Discord.RichEmbed()
-                        .setTitle("🎺 music Selection ✅")
+                        .setTitle("🎺 music Selection ✅  -  [`V 1.15`]")
                         .setDescription(`${videos.map(video2 => `**${++index}** \`${video2.title}\` `).join('\n')}`)
                         .setColor("#ff2052")
-                        .setFooter("Veuillez fournir une valeur pour sélectionner l'un des résultats de recherche allant de 1 à 10.[V 1.10]")
+                        .setTimestamp()
+                        .setFooter("Veuillez fournir une valeur pour sélectionner l'un des résultats de recherche allant de 1 à 10.")
 
                     msg.channel.send(embed);
                     // eslint-disable-next-line max-depth
@@ -159,12 +151,10 @@ client.on('message', async msg => { // eslint-disable-line
             return handleVideo(video, msg, voiceChannel);
         }
 	} else if (command === 'skip') {
-    if (!msg.member.hasPermission("ADMINISTRATOR")) {
-      return msg.reply('IL FAUT AVOIR LES PERMISSION ADMIN POUR EXCUTER CETTE COMMANDE')
-    }
+  
     
 		if (!msg.member.voiceChannel) return msg.channel.send('vous êtes pas dans un canal vocal!');
-		if (!serverQueue) return msg.channel.send('Il  a rien que je puisse skip pour toi.');
+		if (!serverQueue) return msg.channel.send('Il y a rien que je puisse skip pour toi.');
 		serverQueue.connection.dispatcher.end('Skip commande à bien été effectuer');
     const embed = new Discord.RichEmbed()
     .setTitle('Music')
@@ -266,7 +256,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		if (playlist) return undefined;
     var embed = new Discord.RichEmbed()
                 .setTitle("Song Selection")
-                .setDescription(`✅ Playlist: **${playlist.title}** à ben été ajouter dans la playlist !`)
+                .setDescription(`✅ Playlist: **${playlist.title}** à bien été ajouter dans la playlist !`)
                 .setColor("#ff2052")
 		 return msg.channel.send(embed);
 	}
@@ -297,7 +287,7 @@ function play(guild, song) {
 
 	var embed = new Discord.RichEmbed()
         .setTitle("music Selection")
-        .setDescription(`🎵 \`Start music:\` **${song.title}**`)
+        .setDescription(`🎵 \`Début de cette music :\` **${song.title}**`)
         .setColor("#ff2052")
     serverQueue.textChannel.send(embed);
 }
