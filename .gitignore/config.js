@@ -1,5 +1,5 @@
 
-exports.TOKEN = (process.env.TOKEN); //THIS BOT IS FOR MULTIPLE GUILD
-exports.PREFIX = ('g!');
+exports.TOKEN = 'NzE5ODQ3MDcyODczODQwNzIw.XuCe3Q.MS6zTtY3jLZtw5zGAJ8_AICbNYY'; //THIS BOT IS FOR MULTIPLE GUILD
+exports.PREFIX = 'g!';
 
-exports.GOOGLE_API_KEY = (AIzaSyADR83u3IjYzcgEHyBApnTBF6K3kNLKkFc');
+exports.GOOGLE_API_KEY = 'AIzaSyADR83u3IjYzcgEHyBApnTBF6K3kNLKkFc';
